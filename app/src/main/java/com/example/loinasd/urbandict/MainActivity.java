@@ -5,11 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -18,13 +16,12 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     //--------LOG--------------//
     final static String FULL_PAGE_TAG = "FULL PAGE";
-    final static String MESSAGE_TAG = "MESSAGE TAG";
+    //final static String MESSAGE_TAG = "MESSAGE TAG";
     final static String ACT_TAG = "ACT TAG";
     static Parser p;
 
@@ -34,7 +31,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText mainSearch;
     Button searchButton;
     LoadUrl lu;
-    ListView listView;
     LinearLayout root, searchBar, linLayout;
     LayoutInflater itemInflater;
 
@@ -97,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            searchButton.setClickable(false);
             linLayout.removeAllViews();
         }
 
@@ -116,11 +113,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            /*TODO: Pattern p = Pattern.compile("text/html;\\s+charset=([^\\s]+)\\s*");
-            Matcher m = p.matcher(con.getContentType());
-*//* If Content-Type doesn't match this pre-conception, choose default and
- * hope for the best. *//*
-            String charset = m.matches() ? m.group(1) : "UTF-8";*/
+
             try {
                 assert con != null;
                 r = new BufferedReader( new InputStreamReader(con.getInputStream(), "UTF-8"));
@@ -140,15 +133,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             for (Item item : parser.getItems()) {
 
                 View v = itemInflater.inflate(R.layout.item, linLayout, false);
-                tNameView = (TextView) v.findViewById(R.id.RibbonVIew);
-                tRibbonView = (TextView) v.findViewById(R.id.NameView);
+
+                tRibbonView = (TextView) v.findViewById(R.id.RibbonVIew);
+
+                tNameView = (TextView) v.findViewById(R.id.NameView);
                 tMeaningView = (TextView) v.findViewById(R.id.MeaningView);
                 tExampleView = (TextView) v.findViewById(R.id.ExampleView);
-                tNameView.setText(item.getName());
+
                 tRibbonView.setText(item.getRibbon());
+                tNameView.setText(item.getName());
                 tMeaningView.setText(item.getMeaning());
                 tExampleView.setText(item.getExample());
+
+                if (item.getRibbon().isEmpty()) tRibbonView.setVisibility(View.GONE);
+                if (item.getName().isEmpty()) tNameView.setVisibility(View.GONE);
+                if (item.getMeaning().isEmpty()) tMeaningView.setVisibility(View.GONE);
+                if (item.getExample().isEmpty()) tExampleView.setVisibility(View.GONE);
+
                 linLayout.addView(v);
+
+                searchButton.setClickable(true);
             }
 
 
@@ -157,7 +161,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    private void displayItem(Item item) {
-
-    }
 }

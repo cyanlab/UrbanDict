@@ -1,8 +1,5 @@
 package com.example.loinasd.urbandict;
 
-/**
- * Created by loinasd on 10.06.17.
- */
 
 public final class Item {
 
