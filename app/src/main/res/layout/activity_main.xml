@@ -15,7 +15,11 @@
         android:layout_width="match_parent"
         android:layout_height="68dp"
         android:background="@color/MaterialDarkerBackground"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingEnd="6dp"
+        android:paddingLeft="6dp"
+        android:paddingRight="6dp"
+        android:paddingStart="6dp">
 
 
         <EditText
@@ -33,6 +37,7 @@
             android:background="@color/MaterialDarkerBackground"
             android:ems="10"
             android:inputType="textCapWords"
+            android:text="artem"
             android:textColor="@color/MaterialBlue"
             app:layout_constraintHorizontal_bias="0.508"
             app:layout_constraintLeft_toLeftOf="parent"

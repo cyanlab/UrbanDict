@@ -23,6 +23,7 @@ final class Parser{
     private final static String markerName = "=\"word\"";
     private final static String markerRibbon = "=\"ribbon\"";
     private static  int ch = 0;
+    private  static int ribonCount = 0;
 
     private BufferedReader r;
 
@@ -41,11 +42,15 @@ final class Parser{
         ch = 0;
 
         while (hasMoreRibbons()) {
+            ribonCount++;
             Item item = getNewItem();
             items.add(item);
             Log.i(ACT_TAG, item.getName());
             String str = "Ribbon: " + item.getRibbon() + "\nMeaning: " + item.getMeaning() + "\nExample: " + item.getExample();
             Log.i(ACT_TAG, str);
+            if (ribonCount==3) {
+                System.out.println();
+            }
         }
 
 

@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (v.getId() == R.id.searchButton) {
 
             p = new Parser();
+            searchButton.clearFocus();
             lu = new LoadUrl(p, mainSearch.getText().toString());
             lu.execute();
 
