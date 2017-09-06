@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     LoadUrl lu;
     LinearLayout root, searchBar, linLayout;
     LayoutInflater itemInflater;
+    ProgressBar progressBar;
 
 
 
@@ -48,7 +50,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         linLayout = (LinearLayout) findViewById(R.id.linLayout);
         root = (LinearLayout) findViewById(R.id.rootLayout);
         searchBar = (LinearLayout) findViewById(R.id.searchBarLayout);
-
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        progressBar.setVisibility(ProgressBar.INVISIBLE);
 
 
         //---Listener -> Activity----//
@@ -63,6 +66,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if (v.getId() == R.id.searchButton) {
 
+
+
+            progressBar.setVisibility(ProgressBar.VISIBLE);
             p = new Parser();
             searchButton.clearFocus();
             lu = new LoadUrl(p, mainSearch.getText().toString());
@@ -152,7 +158,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (item.getExample().isEmpty()) tExampleView.setVisibility(View.GONE);
 
                 linLayout.addView(v);
-
+                progressBar.setVisibility(ProgressBar.INVISIBLE);
+                progressBar.setVisibility(View.GONE);
                 searchButton.setClickable(true);
             }
 

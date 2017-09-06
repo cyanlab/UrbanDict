@@ -5,7 +5,7 @@
     <color name="colorAccent">#80CBC4</color>
 
     <color name="MaterialBackground">#263238</color>
-    <color name="MaterialDarkerBackground">#2D3238</color>
+    <color name="MaterialDarkerBackground">#2d3238</color>
 
     <color name="MaterialRed">#FF5370</color>
     <color name="MaterialDarkerRed">#E53935</color>
